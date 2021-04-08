@@ -1,0 +1,19 @@
+{
+  "namespace": "com.fretron.model",
+  "type": "record",
+  "name": "User",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": ["string","null"]
+    }
+  ]
+}
