@@ -1,15 +1,12 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+    //    id "org.betterplugin.avro" version "0.19.2-SNAPSHOT"
     id "com.github.davidmc24.gradle.plugin.avro-base" version "1.0.0"
 }
 
-group 'org.fretron'
+group 'org.test'
 version '1.0-SNAPSHOT'
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
 
 repositories {
     mavenCentral()
@@ -17,11 +14,15 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.50'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    implementation "org.apache.avro:avro:1.10.0"
+    // https://mvnrepository.com/artifact/org.apache.avro/avro
+    implementation group: 'org.apache.avro', name: 'avro', version: '1.10.0'
+    // https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson
     implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.32'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-avro:2.12.0-rc2'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.29'
 }
 
@@ -33,44 +34,46 @@ task fatJar(type: Jar) {
     }
     baseName = project.name + '-all'
     from sourceSets.test.output
-//collect all dependencies
+    //collect all dependencies
     from { configurations.testRuntime.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
-    exclude('META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA')
+    exclude ('META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA')
 }
 
-
-task renewAvro {
-    doLast {
-        delete "src/main/java/com/fretron/model"
-        copy {
-            from "build/generated-main-avro-java/com/fretron/model"
-            into "src/main/java/com/fretron/model"
-        }
-    }
-}
-
+//task renewAvro {
+//    doLast {
+//        delete "src/main/java/com/fretron/model"
+//        copy {
+//            from "build/avro/com/fretron/model"
+//            into "src/main/java/com/fretron/model"
+//        }
+//    }
+//}
 
 task generateAvro(type: com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask) {
     source("src/main/avro")
     include("**/**/*.avsc")
     outputDir = file("src/main/java")
 }
+//
+//renewAvro.dependsOn generateAvro
+//build.dependsOn renewAvro
 
-renewAvro.dependsOn generateAvro
-build.dependsOn renewAvro
+avro {
+    fieldVisibility = "PRIVATE"
+}
 
 test {
     useJUnitPlatform()
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
-
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-avro{
-    fieldVisibility = "PRIVATE"
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }

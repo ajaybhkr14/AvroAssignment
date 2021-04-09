@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5548909830587467850L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.model\",\"fields\":[{\"name\":\"firstName\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
+  private static final long serialVersionUID = -3284865254530966921L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.model\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -71,9 +71,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     return DECODER.decode(b);
   }
 
-  @Deprecated public java.lang.String firstName;
-  @Deprecated public java.lang.String id;
-  @Deprecated public java.lang.String email;
+   private java.lang.String name;
+   private java.lang.String id;
+   private java.lang.String email;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -84,12 +84,12 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
 
   /**
    * All-args constructor.
-   * @param firstName The new value for firstName
+   * @param name The new value for name
    * @param id The new value for id
    * @param email The new value for email
    */
-  public User(java.lang.String firstName, java.lang.String id, java.lang.String email) {
-    this.firstName = firstName;
+  public User(java.lang.String name, java.lang.String id, java.lang.String email) {
+    this.name = name;
     this.id = id;
     this.email = email;
   }
@@ -99,7 +99,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return firstName;
+    case 0: return name;
     case 1: return id;
     case 2: return email;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -110,7 +110,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: firstName = value$ != null ? value$.toString() : null; break;
+    case 0: name = value$ != null ? value$.toString() : null; break;
     case 1: id = value$ != null ? value$.toString() : null; break;
     case 2: email = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -118,20 +118,20 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /**
-   * Gets the value of the 'firstName' field.
-   * @return The value of the 'firstName' field.
+   * Gets the value of the 'name' field.
+   * @return The value of the 'name' field.
    */
-  public java.lang.String getFirstName() {
-    return firstName;
+  public java.lang.String getName() {
+    return name;
   }
 
 
   /**
-   * Sets the value of the 'firstName' field.
+   * Sets the value of the 'name' field.
    * @param value the value to set.
    */
-  public void setFirstName(java.lang.String value) {
-    this.firstName = value;
+  public void setName(java.lang.String value) {
+    this.name = value;
   }
 
   /**
@@ -209,7 +209,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
     implements org.apache.avro.data.RecordBuilder<User> {
 
-    private java.lang.String firstName;
+    private java.lang.String name;
     private java.lang.String id;
     private java.lang.String email;
 
@@ -224,8 +224,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
      */
     private Builder(com.fretron.model.User.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.firstName)) {
-        this.firstName = data().deepCopy(fields()[0].schema(), other.firstName);
+      if (isValidValue(fields()[0], other.name)) {
+        this.name = data().deepCopy(fields()[0].schema(), other.name);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.id)) {
@@ -244,8 +244,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
      */
     private Builder(com.fretron.model.User other) {
       super(SCHEMA$);
-      if (isValidValue(fields()[0], other.firstName)) {
-        this.firstName = data().deepCopy(fields()[0].schema(), other.firstName);
+      if (isValidValue(fields()[0], other.name)) {
+        this.name = data().deepCopy(fields()[0].schema(), other.name);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.id)) {
@@ -259,41 +259,41 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
 
     /**
-      * Gets the value of the 'firstName' field.
+      * Gets the value of the 'name' field.
       * @return The value.
       */
-    public java.lang.String getFirstName() {
-      return firstName;
+    public java.lang.String getName() {
+      return name;
     }
 
 
     /**
-      * Sets the value of the 'firstName' field.
-      * @param value The value of 'firstName'.
+      * Sets the value of the 'name' field.
+      * @param value The value of 'name'.
       * @return This builder.
       */
-    public com.fretron.model.User.Builder setFirstName(java.lang.String value) {
+    public com.fretron.model.User.Builder setName(java.lang.String value) {
       validate(fields()[0], value);
-      this.firstName = value;
+      this.name = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'firstName' field has been set.
-      * @return True if the 'firstName' field has been set, false otherwise.
+      * Checks whether the 'name' field has been set.
+      * @return True if the 'name' field has been set, false otherwise.
       */
-    public boolean hasFirstName() {
+    public boolean hasName() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'firstName' field.
+      * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public com.fretron.model.User.Builder clearFirstName() {
-      firstName = null;
+    public com.fretron.model.User.Builder clearName() {
+      name = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -383,7 +383,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     public User build() {
       try {
         User record = new User();
-        record.firstName = fieldSetFlags()[0] ? this.firstName : (java.lang.String) defaultValue(fields()[0]);
+        record.name = fieldSetFlags()[0] ? this.name : (java.lang.String) defaultValue(fields()[0]);
         record.id = fieldSetFlags()[1] ? this.id : (java.lang.String) defaultValue(fields()[1]);
         record.email = fieldSetFlags()[2] ? this.email : (java.lang.String) defaultValue(fields()[2]);
         return record;
@@ -418,11 +418,17 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    out.writeString(this.firstName);
+    out.writeString(this.name);
 
     out.writeString(this.id);
 
-    out.writeString(this.email);
+    if (this.email == null) {
+      out.writeIndex(1);
+      out.writeNull();
+    } else {
+      out.writeIndex(0);
+      out.writeString(this.email);
+    }
 
   }
 
@@ -431,17 +437,22 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      this.firstName = in.readString();
+      this.name = in.readString();
 
       this.id = in.readString();
 
-      this.email = in.readString();
+      if (in.readIndex() != 0) {
+        in.readNull();
+        this.email = null;
+      } else {
+        this.email = in.readString();
+      }
 
     } else {
       for (int i = 0; i < 3; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.firstName = in.readString();
+          this.name = in.readString();
           break;
 
         case 1:
@@ -449,7 +460,12 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
           break;
 
         case 2:
-          this.email = in.readString();
+          if (in.readIndex() != 0) {
+            in.readNull();
+            this.email = null;
+          } else {
+            this.email = in.readString();
+          }
           break;
 
         default:
